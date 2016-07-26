@@ -1,0 +1,14 @@
+---
+# all applications use these settings and services
+applications:
+- name: hhs_acf_uc_api
+  path: .
+  timeout: 180
+  memory: 512M
+  instances: 1
+  domain: 18f.gov
+  host: gsahhs_acf_uc_api
+  services:
+  - hhs_acf_uc_api-db
+  env:
+    DISABLE_COLLECTSTATIC: true

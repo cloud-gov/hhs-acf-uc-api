@@ -1,0 +1,137 @@
+---
+# .about.yml project metadata
+#
+# Short name that acts as the project identifier (required)
+name: hhs_acf_uc_api
+
+# Full proper name of the project (required)
+full_name: HHS ACF Unaccompanied Children API
+
+# The type of content in the repo
+# values: app, docs, policy
+type: app
+
+# Describes whether a project team, working group/guild, etc. owns the repo (required)
+# values: guild, working-group, project
+owner_type: #TODO
+
+# Name of the main project repo if this is a sub-repo; name of the working group/guild repo if this is a working group/guild subproject
+parent: #TODO
+
+# Maturity stage of the project (required)
+# values: discovery, alpha, beta, live, sunset, transfer, end
+stage: beta
+
+# Description of the project
+description: API for the Dept. of Health and Human Services: Administration for Children and Families Unaccompanied Children database
+
+# Tags that describe the project or aspects of the project; comma-separated
+tags: #TODO
+-
+
+# Should this repo have automated tests? If so, set to `true`. (required)
+# values: true, false
+testable: true
+
+# Team members contributing to the project (required)
+# Items:
+# - github: GitHub user name
+#   id: Internal team identifier/user name
+#   role: Team member's role; leads should be designated as 'lead'
+team:
+- github: 18f
+  id: 18F
+  role: lead
+
+# Partners for whom the project is developed
+partners:
+-
+
+# Organizations or individuals who have adopted the project for their own use
+# Items:
+# - id: The name of the organization or individual
+#   url: A URL to the user's version of the project
+users:
+-
+
+# Brief descriptions of significant project developments
+milestones:
+-
+
+# Technologies used to build the project
+stack:
+- Django
+- PostgreSQL
+
+# Brief description of the project's outcomes
+impact: #TODO
+
+# Services used to supply project status information
+# Items:
+# - name: Name of the service
+#   category: Type of the service
+#   url: URL for detailed information
+#   badge: URL for the status badge
+services:
+-
+
+# Licenses that apply to the project and/or its components (required)
+# Items by property name pattern:
+#   .*:
+#     name: Name of the license from the Software Package Data Exchange (SPDX): https://spdx.org/licenses/
+#     url: URL for the text of the license
+licenses:
+  Django:
+    name: BSD-3-Clause
+    url: http://opensource.org/licenses/BSD-3-Clause
+  PostgreSQL:
+    name: PostgreSQL
+    url: http://www.postgresql.org/about/licence/
+  Django REST Framework:
+    name: BSD-2-Clause
+    url: http://opensource.org/licenses/BSD-2-Clause
+  Django REST Swagger:
+    name: BSD-3-Clause
+    url: http://opensource.org/licenses/BSD-3-Clause
+  Django Flat Theme:
+    name: BSD-3-Clause
+    url: http://opensource.org/licenses/BSD-3-Clause
+  Waitress:
+    name: ZPL-2.1
+    url: https://spdx.org/licenses/ZPL-2.1.html#licenseText
+  pytest:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  psycopg2:
+    name: LGPL-3.0
+    url: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+  whitenoise:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  localflavor:
+    name: BSD-3-Clause
+    url: http://opensource.org/licenses/BSD-3-Clause
+  coveralls:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+# Tag to use when blogging about this project
+blogTag:
+-
+
+# Links to project artifacts
+# Items:
+# - url: URL for the link
+#   text: Anchor text for the link
+#   category: Type of the link
+links:
+- url: hhs_acf_uc_api
+  text: hhs_acf_uc_api
+  category:
+
+# URIs for points-of-contact
+# Items:
+# - url: URL for the link
+#   text: Anchor text for the link
+contact:
+-

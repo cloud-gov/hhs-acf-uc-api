@@ -1,0 +1,13 @@
+languages:
+  Python: true
+engines:
+  pep8:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+   paths:
+   - hhs_acf_uc_api/api/**
+exclude_paths:
+   - hhs_acf_uc_api/api/static/**
+   - hhs_acf_uc_api/api/migrations/**/*
