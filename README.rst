@@ -1,7 +1,24 @@
-hhs_acf_uc_api
+API for Unaccompanied Children database
 =============================
 
-API for the Dept. of Health and Human Services: Administration for Children and Families Unaccompanied Children database
+Unaccompanied children apprehended by the Department of Homeland Security (DHS) immigration officials are transferred to the care and custody of Office of Refugee Resettlement (ORR). ORR promptly places an unaccompanied child in the least restrictive setting that is in the best interests of the child, taking into consideration danger to self, danger to the community, and risk of flight. ORR takes into consideration the unique nature of each child’s situation and incorporates child welfare principles when making placement, clinical, case management, and release decisions that are in the best interest of the child.
+
+More info: `www.acf.hhs.gov/orr/programs/ucs`
+
+.. _`www.acf.hhs.gov/orr/programs/ucs`: http://www.acf.hhs.gov/orr/programs/ucs
+
+This repo contains an API for the unaccompanied child database.
+
+Repositories
+------------
+
+- API (this repo)
+- `Dashboard`
+
+.. _`Dashboard`: https://github.com/18F/hhs-acf-uc-dashboard
+
+hhs_acf_uc_api
+------------
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -107,6 +124,6 @@ As stated in `CONTRIBUTING`_:
 
 .. _`CC0 1.0 Universal public domain dedication`: https://creativecommons.org/publicdomain/zero/1.0/
 
-.. _`public domain`: LICENSE
+.. _`public domain`: LICENSE.md
 
 .. _`CONTRIBUTING`: CONTRIBUTING.md
