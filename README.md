@@ -19,6 +19,22 @@ Create databases for development and test using the rake script:
 
     rake db:create:all
 
+The underlying database is ported from oracle and for demonstration
+purposes we are using postgres. It uses schemas :(. To properly setup
+the database, you need to import from a dump. The project has a schema
+checked in, but it cannot be used to setup the database because of the
+schema path usage.
+
+    # development database
+    psql -f ../hhs.pgdump hhs-acf-uc-api_development # or path to your dump
+    psql hhs-acf-uc-api_development
+    set search_path=uacportal,uac_health
+
+    # test database
+    psql -f ../hhs.pgdump hhs-acf-uc-api_test # or path to your dump
+    psql hhs-acf-uc-api_test
+    set search_path=uacportal,uac_health
+
 ## Rails API only
 This app was created with a flag to indicate that it is API only. View
 layers and other parts of Rails are not installed to have a lighter,
