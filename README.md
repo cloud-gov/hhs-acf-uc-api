@@ -26,12 +26,12 @@ checked in, but it cannot be used to setup the database because of the
 schema path usage.
 
     # development database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_development # or path to your dump
+    psql -f db/hhs.structure.sql hhs-acf-uc-api_development # or path to your dump
     psql hhs-acf-uc-api_development
     set search_path=uacportal,uac_health
 
     # test database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_test # or path to your dump
+    psql -f db/hhs.structure.sql hhs-acf-uc-api_test # or path to your full dump
     psql hhs-acf-uc-api_test
     set search_path=uacportal,uac_health
 
