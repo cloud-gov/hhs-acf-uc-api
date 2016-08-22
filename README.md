@@ -15,25 +15,29 @@ and the version manager will give you feedback on installing the needed
 version.
 
 ## Databases
+
 Create databases for development and test using the rake script:
 
     rake db:create:all
 
-The underlying database is ported from oracle and for demonstration
-purposes we are using postgres. It uses schemas :(. To properly setup
-the database, you need to import from a dump. The project has a schema
-checked in, but it cannot be used to setup the database because of the
-schema path usage.
+For this first version of the API, two databases are accessed.  One is for
+storage of data collected with this API (for instance, bed capacity
+data).  The second is a copy of the existing application's database -
+actually, a PostgreSQL port of the existing application's demonstration
+database.  To set this up, get the `hhs.pgdump` file (not checked into
+this repo), and
 
-    # development database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_development # or path to your dump
-    psql hhs-acf-uc-api_development
-    set search_path=uacportal,uac_health
+    createdb hhs
+    psql -f hhs.pgdump hhs # or path to your dump
 
-    # test database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_test # or path to your dump
-    psql hhs-acf-uc-api_test
-    set search_path=uacportal,uac_health
+Then you will need to run an HTSQL server against this database.
+
+    virtualenv-2.7 ~/venvs/htsql
+    source ~/venvs/htsql/bin/activate
+    pip install htsql-pgsql
+    htsql-ctl serve -E tweak.autolimit:limit=10 pgsql://:@/hhs
+
+Leave that process running and start the Rails service.
 
 ## Rails API only
 This app was created with a flag to indicate that it is API only. View
@@ -62,4 +66,3 @@ This project is in the worldwide [public domain](LICENSE.md). As stated in [CONT
 > This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >
 > All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
-
