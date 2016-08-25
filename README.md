@@ -28,7 +28,7 @@ database.  To set this up, get the `hhs.pgdump` file (not checked into
 this repo), and
 
     createdb hhs
-    psql -f hhs.pgdump hhs # or path to your dump
+    psql -f db/hhs_slice.pgdump hhs 
 
 Then you will need to run an HTSQL server against this database.
 
