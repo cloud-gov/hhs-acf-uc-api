@@ -35,7 +35,7 @@ Then you will need to run an HTSQL server against this database.
     virtualenv-2.7 ~/venvs/htsql
     source ~/venvs/htsql/bin/activate
     pip install htsql-pgsql
-    htsql-ctl serve -E tweak.autolimit:limit=10 pgsql://:@/hhs
+    htsql-ctl serve -C htsql-config.yml pgsql://:@/hhs
 
 Leave that process running and start the Rails service.
 

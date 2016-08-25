@@ -1,0 +1,4 @@
+tweak.override:
+  foreign-keys:
+    - uac_program_info(uac_id) -> uac_info(uac_id)
+tweak.meta:

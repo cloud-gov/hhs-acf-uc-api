@@ -1,13 +1,11 @@
-require 'pry'
-
 class EnrollmentProxy < ActiveRestClient::ProxyBase
   ID_PATTERN = /\/(\d+)\//
   get "/enrollment" do
     if url =~ ID_PATTERN
       match = url.match ID_PATTERN
-      url "uac_info?uac_id=#{match[1]}/:json"
+      url "uac_info%7B*,/uac_program_info,/uac_sponsor_list%7D?uac_id=#{match[1]}/:json"
     else
-      url "uac_info/%3Ajson"
+      url "uac_info%7B*,/uac_program_info,/uac_sponsor_list%7D/%3Ajson"
     end
     response = passthrough
     translate(response) do |body|
@@ -24,13 +22,13 @@ class Enrollment < ActiveRestClient::Base
   get :all, "/enrollment"
   get :find, "/enrollment/:id/"
 
-  after_request :unnest
+  after_request :fix_names
 
   private
 
-  def unnest(name, response)
-    response.response_headers["content-type"] = "application/json"
+  def fix_names(name, response)
     # HTSQL returns it as "application/javascript",
     # but ActiveRestClient throws ResponseParseException for that
+    response.response_headers["content-type"] = "application/json"
   end
 end
