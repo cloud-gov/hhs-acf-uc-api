@@ -9,7 +9,13 @@ class EnrollmentProxy < ActiveRestClient::ProxyBase
     end
     response = passthrough
     translate(response) do |body|
-      body['uac_info']
+      result = body['uac_info']
+      result.each do |enrollment|
+        enrollment['programs'] = enrollment['uac_program_info']
+        enrollment.except! 'uac_program_info'
+        enrollment['sponsors'] = enrollment['uac_sponsor_list']
+        enrollment.except! 'uac_sponsor_list'
+      end
     end
   end
 end
