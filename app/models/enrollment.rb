@@ -1,4 +1,4 @@
-class EnrollmentProxy < ActiveRestClient::ProxyBase
+class EnrollmentProxy < Flexirest::ProxyBase
 
   ID_PATTERN = /\/(\d+)\//
   get "/enrollment" do
@@ -19,7 +19,7 @@ class EnrollmentProxy < ActiveRestClient::ProxyBase
   end
 end
 
-class Enrollment < ActiveRestClient::Base
+class Enrollment < Flexirest::Base
   verbose true
   proxy EnrollmentProxy
   base_url Rails.application.config.htsql_server_url
@@ -33,7 +33,7 @@ class Enrollment < ActiveRestClient::Base
 
   def fix_names(name, response)
     # HTSQL returns it as "application/javascript",
-    # but ActiveRestClient throws ResponseParseException for that
+    # but Flexirest throws ResponseParseException for that
     response.response_headers["content-type"] = "application/json"
   end
 end

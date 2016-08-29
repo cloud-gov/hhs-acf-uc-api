@@ -1,6 +1,6 @@
 require 'pry'
 
-class EnrollmentReportProxy < ActiveRestClient::ProxyBase
+class EnrollmentReportProxy < Flexirest::ProxyBase
   get "/enrollment_report" do
     url "v_uac_enrollment_rpt/%3Ajson"
     response = passthrough
@@ -10,7 +10,7 @@ class EnrollmentReportProxy < ActiveRestClient::ProxyBase
   end
 end
 
-class EnrollmentReport < ActiveRestClient::Base
+class EnrollmentReport < Flexirest::Base
   verbose true
   proxy EnrollmentReportProxy
   base_url Rails.application.config.htsql_server_url
@@ -24,6 +24,6 @@ class EnrollmentReport < ActiveRestClient::Base
   def unnest(name, response)
     response.response_headers["content-type"] = "application/json"
     # HTSQL returns it as "application/javascript",
-    # but ActiveRestClient throws ResponseParseException for that
+    # but Flexirest throws ResponseParseException for that
   end
 end
