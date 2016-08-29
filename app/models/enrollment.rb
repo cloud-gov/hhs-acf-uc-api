@@ -1,4 +1,5 @@
 class EnrollmentProxy < ActiveRestClient::ProxyBase
+
   ID_PATTERN = /\/(\d+)\//
   get "/enrollment" do
     if url =~ ID_PATTERN
@@ -11,10 +12,8 @@ class EnrollmentProxy < ActiveRestClient::ProxyBase
     translate(response) do |body|
       result = body['uac_info']
       result.each do |enrollment|
-        enrollment['programs'] = enrollment['uac_program_info']
-        enrollment.except! 'uac_program_info'
-        enrollment['sponsors'] = enrollment['uac_sponsor_list']
-        enrollment.except! 'uac_sponsor_list'
+        enrollment['programs'] = enrollment.delete 'uac_program_info'
+        enrollment['sponsors'] = enrollment.delete 'uac_sponsor_list'
       end
     end
   end
