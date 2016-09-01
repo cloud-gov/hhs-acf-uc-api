@@ -1,9 +1,11 @@
+require 'pry'
+
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :update, :destroy]
 
   # GET /enrollments
   def index
-    @enrollments = Enrollment.all
+    @enrollments = Enrollment.all params
     render json: @enrollments
   end
 
