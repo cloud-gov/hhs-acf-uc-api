@@ -53,5 +53,16 @@ describe '/enrollments' do
         expect(response).to have_http_status(:missing)
       end
     end
+
+    context 'filters passed to HTSQL' do
+      it 'by country of birth' do
+        get "/enrollments/?cob='Honduras'"
+        expect(response).to have_http_status(:ok)
+        enrollments = JSON.parse(response.body)
+        expect(enrollments).not_to be_empty
+        enrollments.each { |e| expect(e['cob']).to eq('Honduras') }
+      end
+    end
+
   end
 end
