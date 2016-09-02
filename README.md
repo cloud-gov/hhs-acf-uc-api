@@ -14,9 +14,24 @@ Ruby version and gem sets are specified in `.ruby-version` and
 and the version manager will give you feedback on installing the needed
 version.
 
-## Databases
+## Running through Vagrant
 
-Create databases for development and test using the rake script:
+If you can [install Vagrant](https://www.vagrantup.com/), this
+is the easiest way to run.  Clone this repository, `cd hhs-acf-uc-api`,
+and then run:
+
+    vagrant up
+    vagrant ssh
+
+Within the vagrant SSH session, run
+
+    cd /host
+    ./run-on-vagrant.sh
+
+## Running locally
+
+Install [PostgreSQL](https://www.postgresql.org/), then
+create databases for development and test using the rake script:
 
     rake db:create:all
 
@@ -24,11 +39,10 @@ For this first version of the API, two databases are accessed.  One is for
 storage of data collected with this API (for instance, bed capacity
 data).  The second is a copy of the existing application's database -
 actually, a PostgreSQL port of the existing application's demonstration
-database.  To set this up, get the `hhs.pgdump` file (not checked into
-this repo), and
+database.  To set this up:
 
     createdb hhs
-    psql -f db/hhs_slice.pgdump hhs 
+    psql -f db/hhs_slice.pgdump hhs
 
 Then you will need to run an HTSQL server against this database.
 
