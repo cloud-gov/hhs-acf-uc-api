@@ -1,4 +1,5 @@
 require 'model_helper'
+require 'pry'
 
 class EnrollmentProxy < GeneralProxy
 

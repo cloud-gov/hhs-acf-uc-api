@@ -7,6 +7,8 @@ More info: www.acf.hhs.gov/orr/programs/ucs
 This repo will contain an API application used to wrap the existing
 database (or in demo mode, a mocked database).
 
+# Installation
+
 ## Ruby Version
 
 Ruby version and gem sets are specified in `.ruby-version` and
@@ -52,6 +54,61 @@ Then you will need to run an HTSQL server against this database.
     htsql-ctl serve -C htsql-config.yml pgsql://:@/hhs
 
 Leave that process running and start the Rails service.
+
+# Usage
+
+## Full reports  
+
+The following reports return a row for each child's enrollment history.
+
+    /children
+
+The most general form of the report, with no filtering.
+
+    /children?in_care=Y
+
+Includes only children whose status is 'IN-TRANSFER', 'ADMITTED', or 'ENROUTE'
+with regard to a program.  These are the ones accounted for in
+a "Census" value of children in care.
+
+Some similar filters available:
+
+    tender_age (12 or less)
+
+Extra boolean fields are available that can conveniently show
+whether a child was `referred_today`, `placed_today`, or
+`discharged_today`.  These are equivalent to checking whether
+`referral_date`, `date_orr_approved`, or `facility_discharged_date`
+(respectively) equal today's date.
+
+## By-day
+
+When the query includes an `as_of` filter (accepting a date, or
+  `now` or `today`), then the following fields are calculated according
+  to that date:
+
+    referred_today
+    placed_today
+    discharged_today
+    in_care
+
+Example:
+
+    /children?in_care=Y&as_of=2016-07-20
+
+The other fields do *not necessarily* reflect the record's status at the
+`as_of` date.  For instance, `uac_status` is still the child's *present*
+status, which may not be their status on the `as_of` date.
+
+TODO: That is way too confusing.  Need to think about how to resolve it.
+
+## Counts
+
+For `/children/count/`, instead of one record per child, there will be one
+record per day, with numbers rather than Y/N for `in_care`,
+`referred_today`, `placed_today`, and `discharged_today`.  
+
+# Development
 
 ## Rails API only
 This app was created with a flag to indicate that it is API only. View

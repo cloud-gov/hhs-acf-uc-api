@@ -25,4 +25,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'flexirest'
 gem 'pry-byebug'
 gem 'simplecov', :require => false, :group => :test
-
+gem 'httparty'

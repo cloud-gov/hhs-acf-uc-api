@@ -1,7 +1,8 @@
 require 'pry'
+require 'date'
 
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: [:show, :update, :destroy]
+  before_action :set_enrollment, only: [:show]
 
   # GET /enrollments
   def index
@@ -16,6 +17,26 @@ class EnrollmentsController < ApplicationController
     else
       render status: 404, plain: "Not Found"
     end
+  end
+
+  def count
+    # TODO: support other filter parameters
+    if params.has_key? 'as_of'
+      date = Date.parse(params['as_of'])
+      # TODO: normalize date input, trap errors
+    else
+      date = Date.today
+    end
+    path = '%7B' + "date:='#{date}'," +
+      'in_care:=count(uac_program_info?!is_null(date_referred)^uac_id),' +
+      "referred_today:=count(uac_info?date(referral_date)=date('#{date}'))," +
+      "placed_today:=count(uac_info?date(date_orr_approved)=date('#{date}'))," +
+      "discharged_today:=count(uac_info?date(facility_discharged_date)=date('#{date}'))" +
+      '%7D/:json'
+    url = Rails.application.config.htsql_server_url + path
+    response = HTTParty.get(url)
+    result = JSON.parse(response)
+    render json: [result["0"][0], ]
   end
 
   private

@@ -64,5 +64,40 @@ describe '/enrollments' do
       end
     end
 
+    context 'provides census counts' do
+      it 'when no as_of date provided' do
+        get "/enrollments/count"
+        expect(response).to have_http_status(:ok)
+        counts = JSON.parse(response.body)
+        expect(counts).not_to be_empty
+        count = counts[0]
+        expect(count).to have_key 'in_care'
+        expect(count['in_care']).to be_an Integer
+        expect(count).to have_key 'referred_today'
+        expect(count['referred_today']).to be_an Integer
+        expect(count).to have_key 'placed_today'
+        expect(count['placed_today']).to be_an Integer
+        expect(count).to have_key 'discharged_today'
+        expect(count['discharged_today']).to be_an Integer
+      end
+      it 'when as_of date provided' do
+        get "/enrollments/count?as_of=2014-01-22"
+        expect(response).to have_http_status(:ok)
+        counts = JSON.parse(response.body)
+        expect(counts).not_to be_empty
+        count = counts[0]
+        expect(count).to have_key 'in_care'
+        expect(count['in_care']).to be_an Integer
+        expect(count).to have_key 'referred_today'
+        expect(count['referred_today']).to be_an Integer
+        expect(count['referred_today']).not_to be 0
+        expect(count).to have_key 'placed_today'
+        expect(count['placed_today']).to be_an Integer
+        expect(count['referred_today']).not_to be 0
+        expect(count).to have_key 'discharged_today'
+        expect(count['discharged_today']).to be_an Integer
+      end
+    end
+
   end
 end
