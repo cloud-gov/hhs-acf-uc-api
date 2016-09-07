@@ -28,6 +28,18 @@ describe '/enrollments' do
         has_programs = all_enrollments.map {|e| not e['programs'].empty?}
         expect has_programs.any?
       end
+
+      it 'contains calculated fields' do
+        get '/enrollments/'
+        all_enrollments = JSON.parse(response.body)
+        all_enrollments.each do |e|
+          expect e.has_key? "referred_today"
+          expect e.has_key? "placed_today"
+          expect e.has_key? "discharged_today"
+        end
+      end
+
+
     end
 
     context 'by id' do
@@ -97,6 +109,18 @@ describe '/enrollments' do
         expect(count).to have_key 'discharged_today'
         expect(count['discharged_today']).to be_an Integer
       end
+      it 'counts depend on as_of values' do
+        get "/enrollments/count?as_of=2000-01-22"
+        counts = JSON.parse(response.body)
+        count = counts[0]
+        expect(count['in_care']).to be 0
+        get "/enrollments/count?as_of=2015-01-22"
+        counts = JSON.parse(response.body)
+        count = counts[0]
+        expect(count['in_care']).not_to be 0
+      end
+
+      # TODO: graceful fail for bad date
     end
 
   end

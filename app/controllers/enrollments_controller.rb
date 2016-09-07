@@ -27,13 +27,14 @@ class EnrollmentsController < ApplicationController
     else
       date = Date.today
     end
-    admitted = "date(date_referred)<date('#{date}')"
-    not_discharged = "(is_null(date_discharged)|date(date_discharged)>date('#{date}'))"
+    dt = "date('#{date}')"
+    admitted = "date(date_referred)<#{dt}"
+    not_discharged = "(is_null(date_discharged)|date(date_discharged)>#{dt})"
     in_care = "in_care:=count(uac_program_info?#{admitted}&#{not_discharged}),"
-    path = '%7B' + "date:='#{date}'," + in_care +
-      "referred_today:=count(uac_info?date(referral_date)=date('#{date}'))," +
-      "placed_today:=count(uac_info?date(date_orr_approved)=date('#{date}'))," +
-      "discharged_today:=count(uac_info?date(facility_discharged_date)=date('#{date}'))" +
+    path = '%7B' + "date:=#{dt}," + in_care +
+      "referred_today:=count(uac_info?date(referral_date)=#{dt})," +
+      "placed_today:=count(uac_info?date(date_orr_approved)=#{dt})," +
+      "discharged_today:=count(uac_info?date(facility_discharged_date)=#{dt})" +
       '%7D/:json'
     url = Rails.application.config.htsql_server_url + path
     response = HTTParty.get(url)

@@ -55,6 +55,9 @@ Then you will need to run an HTSQL server against this database.
 
 Leave that process running and start the Rails service.
 
+# TODO: Notes on connecting to Oracle for production 
+
+
 # Usage
 
 ## Full reports  
