@@ -27,8 +27,10 @@ class EnrollmentsController < ApplicationController
     else
       date = Date.today
     end
-    path = '%7B' + "date:='#{date}'," +
-      'in_care:=count(uac_program_info?!is_null(date_referred)^uac_id),' +
+    admitted = "date(date_referred)<date('#{date}')"
+    not_discharged = "(is_null(date_discharged)|date(date_discharged)>date('#{date}'))"
+    in_care = "in_care:=count(uac_program_info?#{admitted}&#{not_discharged}),"
+    path = '%7B' + "date:='#{date}'," + in_care +
       "referred_today:=count(uac_info?date(referral_date)=date('#{date}'))," +
       "placed_today:=count(uac_info?date(date_orr_approved)=date('#{date}'))," +
       "discharged_today:=count(uac_info?date(facility_discharged_date)=date('#{date}'))" +
