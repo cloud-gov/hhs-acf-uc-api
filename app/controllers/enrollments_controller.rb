@@ -1,13 +1,24 @@
 require 'pry'
 require 'date'
+require 'htsql'
 
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show]
 
   # GET /enrollments
+  # def index
+  #   @enrollments = Enrollment.all params
+  #   render json: @enrollments
+  # end
+
   def index
-    @enrollments = Enrollment.all params
-    render json: @enrollments
+    new_params = params.to_unsafe_h
+
+    htsql = Htsql.new
+    new_params.delete 'action'
+    new_params.delete 'controller'
+    result = htsql.enrollments new_params
+    render json: result
   end
 
   # GET /enrollments/1

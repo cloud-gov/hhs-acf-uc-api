@@ -1,0 +1,2 @@
+# -e git://github.com/jmcarp/py-cfenv.git#egg=cfenv
+htsql-pgsql

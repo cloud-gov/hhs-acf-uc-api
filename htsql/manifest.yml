@@ -1,0 +1,11 @@
+applications:
+- command: htsql-ctl serve -C htsql-config.yml --port $PORT `python get_db_uri.py`
+  disk_quota: 1024M
+  domain: apps.cloud.gov
+  host: hhs-uc-htsql
+  instances: 1
+  memory: 512M
+  name: hhs-uc-htsql
+  services:
+  - hhs-uc-legacy-db
+  stack: cflinuxfs2
