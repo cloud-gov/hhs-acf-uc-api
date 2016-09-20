@@ -1,0 +1,10 @@
+applications:
+- disk_quota: 1024M
+  domain: apps.cloud.gov
+  host: hhs-uc-api
+  instances: 1
+  memory: 512M
+  name: hhs-uc-api
+  services:
+  - hhs-uc-api-db
+  stack: cflinuxfs2

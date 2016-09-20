@@ -1,0 +1,6 @@
+tweak.override:
+  foreign-keys:
+    - uac_program_info(uac_id) -> uac_info(uac_id)
+tweak.autolimit:
+  limit: 20
+tweak.meta:
