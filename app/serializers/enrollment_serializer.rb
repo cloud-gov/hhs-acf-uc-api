@@ -26,12 +26,24 @@ class EnrollmentSerializer < ActiveModel::Serializer
   end
 
   def referring_office
-    object.referring_office.referring_sector
+    if object.referring_office
+      {
+        type: object.referring_office.ice_cbp_type,
+        description: object.referring_office.description
+      }
+    else
+      {
+        type: "Unknown",
+        description: "Unknown ice_cbp_id"
+      }
+    end
+    # TODO: Is this unforgivably cheesy?
+    # select referring_office from uac_info where referring_office not in (select ice_cbp_id from list_ice_cbp);
   end
 
   def orr # Office of Refugee Resettlement = ORR
     {
-      #date_approved: 
+      #date_approved:
     }
   end
 
@@ -48,9 +60,9 @@ class EnrollmentSerializer < ActiveModel::Serializer
 
   def program
     {
-      id: object.uac_program_id,
-      name: program_object.name,
-      type: program_object.type
+      id: program_object.id,
+      name: program_object.program_name,
+      type: if program_object.program_type then program_object.program_type.program_type end
     }
   end
 
