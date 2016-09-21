@@ -8,5 +8,5 @@ class Enrollment < ApplicationRecord
   has_many :enrollment_sponsors, foreign_key: :uac_id
   has_many :sponsors, through: :enrollment_sponsors
 
-  has_one  :referring_office, foreign_key: :ice_cbp_id
+  belongs_to :referring_office, foreign_key: "referring_office"
 end
