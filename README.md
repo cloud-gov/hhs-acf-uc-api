@@ -26,14 +26,42 @@ checked in, but it cannot be used to setup the database because of the
 schema path usage.
 
     # development database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_development # or path to your dump
+    psql -f db/hhs.structure.sql hhs-acf-uc-api_development # or path to your dump
     psql hhs-acf-uc-api_development
     set search_path=uacportal,uac_health
 
     # test database
-    psql -f ../hhs.pgdump hhs-acf-uc-api_test # or path to your dump
+    psql -f db/hhs.structure.sql hhs-acf-uc-api_test # or path to your full dump
     psql hhs-acf-uc-api_test
     set search_path=uacportal,uac_health
+
+## Sample queries
+
+    /enrollments
+    /enrollments/count/
+    /enrollments?cob=Honduras&gender=M
+
+All enrollments, with only the explicitly specified filters.
+Adding `/count/` provides an integer number instead of the
+full records (and returns much faster).
+
+    /in_care/
+    /in_care/count
+    /in_care/count?cob=Honduras&gender=M
+
+Filtered to children currently in care.
+
+    /in_care/count?on=2014-02-01
+
+Filtered to children in care on Feb. 1, 2014.
+
+    /placements?on=2014-02-22
+    /referrals?on=2014-02-22
+    /discharges?on=2014-02-22
+
+Filtered to children placed, referred, and discharged
+(respectively) on that date.  These endpoints also
+support `/count/`.
 
 ## Rails API only
 This app was created with a flag to indicate that it is API only. View
@@ -62,4 +90,3 @@ This project is in the worldwide [public domain](LICENSE.md). As stated in [CONT
 > This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >
 > All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
-
