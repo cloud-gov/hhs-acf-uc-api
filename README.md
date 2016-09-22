@@ -55,20 +55,20 @@ Then you will need to run an HTSQL server against this database.
 
 Leave that process running and start the Rails service.
 
-# TODO: Notes on connecting to Oracle for production 
+# TODO: Notes on connecting to Oracle for production
 
 
 # Usage
 
-## Full reports  
+## Full reports
 
 The following reports return a row for each child's enrollment history.
 
-    /children
+    /enrollments
 
 The most general form of the report, with no filtering.
 
-    /children?in_care=Y
+    /enrollments?in_care=Y
 
 Includes only children whose status is 'IN-TRANSFER', 'ADMITTED', or 'ENROUTE'
 with regard to a program.  These are the ones accounted for in
@@ -97,7 +97,7 @@ When the query includes an `as_of` filter (accepting a date, or
 
 Example:
 
-    /children?in_care=Y&as_of=2016-07-20
+    /enrollments?in_care=Y&as_of=2016-07-20
 
 The other fields do *not necessarily* reflect the record's status at the
 `as_of` date.  For instance, `uac_status` is still the child's *present*
@@ -107,9 +107,9 @@ TODO: That is way too confusing.  Need to think about how to resolve it.
 
 ## Counts
 
-For `/children/count/`, instead of one record per child, there will be one
+For `/enrollments/count/`, instead of one record per child, there will be one
 record per day, with numbers rather than Y/N for `in_care`,
-`referred_today`, `placed_today`, and `discharged_today`.  
+`referred_today`, `placed_today`, and `discharged_today`.
 
 # Development
 
