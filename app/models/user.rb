@@ -16,4 +16,8 @@ class User
   def self.serialize_into_session(o)
     ''
   end
+
+  def self.http_authenticatable
+    false
+  end
 end
