@@ -54,6 +54,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    composite_primary_keys (9.0.2)
+      activerecord (~> 5.0.0)
     concurrent-ruby (1.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -148,6 +150,7 @@ DEPENDENCIES
   active_model_serializers
   byebug
   capybara
+  composite_primary_keys
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)
