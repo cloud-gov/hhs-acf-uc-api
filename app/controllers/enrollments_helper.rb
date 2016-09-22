@@ -1,6 +1,7 @@
 require 'date'
 
 class GeneralEnrollmentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_enrollment, only: [:show]
 
   def correct_params
