@@ -254,7 +254,19 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  
+  config.warden do |manager|
+    # Add custom JSON Web Token strategy
+    manager.strategies.add(:jwt, Devise::Strategies::JWTStrategy)
+
+    # Remove all the default strategies
+    while (manager.default_strategies(scope: :user).length > 0)
+      manager.default_strategies(scope: :user).pop
+    end
+
+    # Put our JWT strategy in the list of handler
+    manager.default_strategies(scope: :user).push :jwt
+  end
+
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.
