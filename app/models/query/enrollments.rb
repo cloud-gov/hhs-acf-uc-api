@@ -35,3 +35,26 @@ module Query
     end
   end
 end
+
+<<-NOTES
+
+Queries needed:
+* referrals - done
+* in care
+* discharged
+
+Current status from uac_program_info table:
+["DISCHARGED", "ADMITTED", "IN-TRANSFER", "ENROUTE"]
+
+in care: "ADMITTED", "IN-TRANSFER", "ENROUTE"
+discharged: "DISCHARGED"
+
+uac status from uac_info
+[nil, "PENDING", "IN-TRANSFER", "ENROUTE", "DISCHARGED", "ADMITTED", "CANCELLED"]
+
+no info: nil, "PENDING", "CANCELLED"
+in care: "IN-TRANSFER", "ENROUTE", "ADMITTED"
+discharged: "DISCHARGED"
+
+
+NOTES

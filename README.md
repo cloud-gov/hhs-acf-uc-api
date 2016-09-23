@@ -50,7 +50,18 @@ Only the queries needed for the dashboard have been created:
     /referrals/count # defaults to today
     /referrals/count?on=2016-07-14 # on a particular day
 
+#### Placements
 
+According to Olympia, this is the same as Referrals, just different
+syntax used by the intake team.
+
+#### Discharges on a given date
+
+    /discharges # defaults to today
+    /discharges?on=2016-07-14 # on a particular day
+    /discharges/count # defaults to today
+    /discharges/count?on=2016-07-14 # on a particular day
+----
 
 ## Sample queries
 
@@ -111,3 +122,7 @@ This project is in the worldwide [public domain](LICENSE.md). As stated in [CONT
 > This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >
 > All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
+
+### Deploying
+
+    cf target -o 18F-acq -s staging
