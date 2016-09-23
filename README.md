@@ -35,6 +35,23 @@ schema path usage.
     psql hhs-acf-uc-api_test
     set search_path=uacportal,uac_health
 
+## Queries and usage
+
+This application exposes and handles in memory no PII. All PII stays in
+the existing database extracting only calculations, dates and ids and
+other non-sensitive information.
+
+Only the queries needed for the dashboard have been created:
+
+#### Referrals on a given date
+
+    /referrals # defaults to today
+    /referrals?on=2016-07-14 # on a particular day
+    /referrals/count # defaults to today
+    /referrals/count?on=2016-07-14 # on a particular day
+
+
+
 ## Sample queries
 
     /enrollments
@@ -73,10 +90,14 @@ faster code base.
 ## Tests
 
 Test are in rspec. Since this is an api-only application no selenium or
-headless substitute needed! Feature specs can be developed in rspec with
-`rails g rspec:feature`.
+headless substitute needed! The test database does need to be loaded
+since database constraints make it hard to write data into the database.
+This is going to make a CI server really hard since the setup involves
+psql and setting the schema. That will need to wait!
 
-Run the tests with the `rspec` command
+Follow instruction above to pre-load data into the test database.
+
+Run the tests with the `rspec` command.
 
 ## Contributing
 
