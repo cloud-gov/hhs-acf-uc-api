@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :enrollments do
     get 'count', on: :collection
   end
