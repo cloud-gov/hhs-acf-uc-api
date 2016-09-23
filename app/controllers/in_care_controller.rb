@@ -1,10 +1,9 @@
-class InCareController < EnrollmentsController
-  def correct_params
-    params["in_care"] = true
+class InCareController < EnrollmentsBaseController
+  def index
+    render json: Query::InCare.new(params).all
   end
 
   def count
-    self.query
-    render json: {:in_care => @enrollments.count}
+    render json: {count: Query::InCare.new(params).count }
   end
 end
