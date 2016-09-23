@@ -1,7 +1,4 @@
-require 'enrollments_helper'
-
-class InCareController < GeneralEnrollmentsController
-
+class InCareController < EnrollmentsController
   def correct_params
     params["in_care"] = true
   end
@@ -10,5 +7,4 @@ class InCareController < GeneralEnrollmentsController
     self.query
     render json: {:in_care => @enrollments.count}
   end
-
 end
