@@ -65,6 +65,7 @@ GEM
     json (1.8.3)
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
+    jwt (1.5.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -151,6 +152,7 @@ DEPENDENCIES
   byebug
   capybara
   composite_primary_keys
+  jwt
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)
@@ -158,4 +160,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
