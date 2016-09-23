@@ -1,6 +1,7 @@
 require 'enrollments_helper'
 
 class InCareController < GeneralEnrollmentsController
+
   def correct_params
     params["in_care"] = true
   end
