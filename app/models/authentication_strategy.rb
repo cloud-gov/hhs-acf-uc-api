@@ -5,14 +5,9 @@ class AuthenticationStrategy
     end
 
     begin
-      public_key = OpenSSL::PKey::RSA.new(File.read("keys/public.key"))
+      hmac_secret = ENV["AUTH_HMAC_SECRET"]
       raw_token = request.headers["Authorization"].split(" ").last
-      token = JWT.decode(raw_token, public_key, true, { :algorithm => "RS512" })
-      if token.length > 0
-        if Date.parse(token[0]["expires"]).past?
-          raise Exception.new('Token is expired')
-        end
-      end
+      token = JWT.decode(raw_token, hmac_secret, true, { :algorithm => "HS512" })
       true
     rescue Exception => error
       raise AuthenticationError.new(error.message)
