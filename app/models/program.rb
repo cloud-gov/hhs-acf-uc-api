@@ -3,5 +3,4 @@ class Program < ApplicationRecord
   self.primary_key = "program_id"
 
   belongs_to :program_type
-
 end

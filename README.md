@@ -61,6 +61,14 @@ syntax used by the intake team.
     /discharges?on=2016-07-14 # on a particular day
     /discharges/count # defaults to today
     /discharges/count?on=2016-07-14 # on a particular day
+
+#### In care on a given date*
+
+    /discharges # defaults to today
+    /discharges?on=2016-07-14 # on a particular day
+    /discharges/count # defaults to today
+    /discharges/count?on=2016-07-14 # on a particular day
+
 ----
 
 ## Sample queries
