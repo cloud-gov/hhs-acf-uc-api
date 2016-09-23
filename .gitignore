@@ -16,5 +16,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore Postgres dumpfiles 
+*.pgdump
+
 # Ignore keys
 /keys/*
