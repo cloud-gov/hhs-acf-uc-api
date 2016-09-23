@@ -19,8 +19,8 @@ module Query
 
     def query
       Enrollment
-        .where('date_orr_approved >= ?', start_of_day)
-        .where('date_orr_approved <  ?', end_of_day)
+        .where('date_orr_approved >= ?', date_parser.start_of_day)
+        .where('date_orr_approved <  ?', date_parser.end_of_day)
     end
 
     private
@@ -29,18 +29,8 @@ module Query
       Paginator.new(params)
     end
 
-    def start_of_day
-      on.to_time.utc
-    end
-
-    def end_of_day
-      (on + 1).to_time.utc
-    end
-
-    def on
-      Date.parse(params[:on])
-    rescue
-      Date.today
+    def date_parser
+      DateParser.new(params)
     end
   end
 end
