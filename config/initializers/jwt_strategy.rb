@@ -20,10 +20,14 @@ module Devise
 
       def claims
         if File.exist?('keys/public.key')
-          public_key = OpenSSL::PKey::RSA.new(File.read('keys/public.key'))
-          auth_header = request.headers['Authorization'] and
-            token = auth_header.split(' ').last and
-              ::JWT.decode(token, public_key, true, { :algorithm => 'RS512' })[0]
+          begin
+            public_key = OpenSSL::PKey::RSA.new(File.read('keys/public.key'))
+            auth_header = request.headers['Authorization'] and
+              token = auth_header.split(' ').last and
+                ::JWT.decode(token, public_key, true, { :algorithm => 'RS512' })[0]
+          rescue
+            nil
+          end
         else
           nil
         end
