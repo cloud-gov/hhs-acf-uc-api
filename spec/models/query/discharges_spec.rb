@@ -32,13 +32,5 @@ RSpec.describe Query::Discharges, "#count" do
       end
     end
   end
-
-  context '#on_status' do
-    let(:count) { Query::Discharges.new({}).on_status.count }
-
-    it 'includes those with status agreement' do
-      expect(count).to eq(50115)
-    end
-  end
 end
 
