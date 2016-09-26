@@ -20,21 +20,23 @@ If your environment has a different version of Ruby than what the API expects, y
 rvm install `cat .ruby-version`
 ```
 
-The environment will also need [PostgreSQL](https://www.postgresql.org/).
-
 ## The application
 
-The application depends on a handful of Ruby libraries.  These are specified in the Gemfile.  The Gemfile provides a quick way to install all of the libraries at once using `bundler` instead of having to do each one manually.  To install the application library dependencies, run:
+The application depends on a handful of Ruby libraries.  These are specified in the Gemfile.  The Gemfile provides a quick way to install all of the libraries at once using `bundle` instead of having to do each one manually.  To install the application library dependencies, run:
 
 ```
-# Make sure bundler is installed.
-gem install bundler
+# Make sure bundle is installed.
+gem install bundle
 
 # Install from the Gemfile
-bundler install
+bundle install
 ```
 
 ## Preparing the database
+
+The largest chunk of work will be preparing the database.  This requires editing the file at `config/database.yml`.
+
+[[Does anyone know what should go here?]]
 
 There are Ruby scripts provided to create the database using `rake`.  To get the database ready, run:
 
@@ -46,13 +48,17 @@ gem install rake
 rake db:create:all
 ```
 
-Next, import the schema and data using psql commands:
+## Environment variables
+
+There are three required environment variables:
 
 ```
-psql -f db/hhs.structure.sql hhs-acf-uc-api_development # or path to your dump
-psql hhs-acf-uc-api_development
-set search_path=uacportal,uac_health
+export RAILS_ENV='production'
+export RACK_ENV='production'
+export AUTH_HMAC_SECRET='some-secret-string'
 ```
+
+The `AUTH_HMAC_SECRET` environment variable is used to encrypt authentication calls between the Dashboard and API, and must be set to the same value on both.  It is a cryptographic key so should be reasonably secure.  A reasonable choice would be to concatenate together a couple of passwords from https://www.grc.com/passwords.htm.
 
 ## Start the API
 
