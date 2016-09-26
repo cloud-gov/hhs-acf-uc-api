@@ -2,13 +2,19 @@
 
 ## Environment
 
-You will need a Linux environment with [Ruby](https://www.ruby-lang.org/en/) installed.  To see which version of Ruby the API currently needs:
+You will need a Linux environment with [Ruby](https://www.ruby-lang.org/en/) installed.  To see which version of Ruby is currently installed, run:
+
+```
+ruby --version
+```
+
+To see which version of Ruby the API currently needs:
 
 ```
 cat .ruby-version
 ```
 
-If your environment has a different version of Ruby, you can either change the global version or, preferably, install [rvm](http://rvm.io/) to manage multiple Ruby versions.  Once rvm is installed, you can install the proper version of Ruby by running:
+If your environment has a different version of Ruby than what the API expects, you can either change the global version or install [rvm](http://rvm.io/) to manage multiple Ruby versions.  Once rvm is installed, you can install the proper version of Ruby by running:
 
 ```
 rvm install `cat .ruby-version`
