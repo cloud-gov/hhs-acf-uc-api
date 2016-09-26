@@ -7,6 +7,10 @@ More info: www.acf.hhs.gov/orr/programs/ucs
 This repo will contain an API application used to wrap the existing
 database (or in demo mode, a mocked database).
 
+## Deploying
+
+Deploy information is available in [deploy.md](deploy.md).
+
 ## Ruby Version
 
 Ruby version and gem sets are specified in `.ruby-version` and
