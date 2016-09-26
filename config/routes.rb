@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   resources :in_care do
     get 'count', on: :collection
   end
+
+  resources :daily_statistics do
+    get 'count', on: :collection
+  end
 end
