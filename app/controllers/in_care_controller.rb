@@ -1,4 +1,4 @@
-class InCareController < EnrollmentsBaseController
+class InCareController < ApplicationController
   def index
     render json: Query::InCare.new(params).all
   end
