@@ -4,6 +4,7 @@ class Enrollment < ApplicationRecord
 
   has_many :enrollment_programs, foreign_key: :uac_id
   has_many :programs, through: :enrollment_programs
+  has_many :program_exits, through: :programs
 
   has_many :enrollment_sponsors, foreign_key: :uac_id
   has_many :sponsors, through: :enrollment_sponsors
