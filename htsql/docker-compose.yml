@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment: 
+     - POSTGRES_PASSWORD=docker  
+     - POSTGRES_USER=docker
+    volumes:
+     - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  htsql:
+    image: 18fgsa/htsql-pgsql
+    ports: 
+     - "8080:8080"
+    command: serve -E tweak.meta pgsql://docker:docker@db/docker
+    depends_on:
+     - db
+    
