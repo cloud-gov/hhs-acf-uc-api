@@ -46,13 +46,16 @@ We have included [activerecord-oracle_enhanced-adapter](https://github.com/rsim/
 
 ```
 production:
-  adapter: oracle_enhanced
-  host: database.host.gov
-  port: 1521
-  database: database-name
-  username: username
-  password: password
+  url: <%= ENV['DATABASE_URL'] %>
 ```
+
+Then add your database connection URL to your environment variables.  For example:
+
+```
+export DATABASE_URL='oracle-enhanced://username:password@host:port/database-name'
+```
+
+> **NOTE:** It is a best practice to put your database connection information in an environment variable in any case.  This is inline with the [12-factor app methodology](https://12factor.net/config).  This makes moving the app around much easier.
 
 ## Environment variables
 
@@ -64,6 +67,8 @@ export RACK_ENV='production'
 export AUTH_HMAC_SECRET='some-secret-string'
 export SECRET_KEY_BASE='some-other-secret-string'
 ```
+
+You may also need database connection information depending on your configuration.
 
 The `AUTH_HMAC_SECRET` environment variable is used to encrypt authentication calls between the Dashboard and API, and must be set to the same value on both.
 
