@@ -1,0 +1,13 @@
+applications:
+- name: hhs-uc-api 
+  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  memory: 1GB
+  env:
+    DEFAULT_URL_HOST: hhs-uc-htsql.apps.cloud.gov 
+    HOST: hhs-uc-htsql.apps.cloud.gov
+    APPLICATION_HOST: hhs-uc-htsql.apps.cloud.gov
+    RESTRICT_ACCESS: true
+    RACK_ENV: production
+    RAILS_ENV: production
+  services:
+    - hhs-uc-api-db 
