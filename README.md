@@ -53,7 +53,7 @@ All endpoints must be authenticated.  Authentication is handled with a [JSON Web
 
 The HMAC secret is used to encrypt authentication calls to the API. It is essentially a cryptographic key shared between the API and its clients, so it should be reasonably secure. A reasonable choice would be to concatenate together a couple of passwords from https://www.grc.com/passwords.htm.
 
-For the API to function, the shared secret must be in an environment variable called `AUTH_HMAC_SECRET`.
+For the API to function, the shared secret must be in an environment variable called `AUTH_HMAC_SECRET`.  In development, this secret is set in the `.env` file and is read into the environment using [dotenv](https://github.com/bkeepers/dotenv).  **It is important to note** that the `.env` file is **NOT** read in production.
 
 For client requests, the JWT token must be placed in the `Authorization` header, preceded by the word "Token" (e.g., the full header would be `Authorization: Token {token}`).
 
