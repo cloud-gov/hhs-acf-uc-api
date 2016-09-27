@@ -36,15 +36,26 @@ bundle install
 
 Without a PaaS for deployment, the best option for scripting deploys is a tool called [Capistrano](http://capistranorb.com/). Capistrano solves the problems of maintaining shared resources between deploys such as database configuration and logs.
 
-Using this tool or another, database configuration is managed via a file that is copied in after the code is deployed: `config/database.yml`. The one checked into source control is setup for development/test environments, and can serve as an example for the one needed for production. See [Rails documentation (http://edgeguides.rubyonrails.org/configuring.html#configuring-a-database) for more details on what this file contains and how it can be modified.
+Using this tool or another, database configuration is managed via a file that is copied in after the code is deployed: `config/database.yml`. The one checked into source control is setup for development/test environments, and can serve as an example for the one needed for production. See [Rails documentation](http://edgeguides.rubyonrails.org/configuring.html#configuring-a-database) for more details on what this file contains and how it can be modified (more notes in the next section as well).
 
 ## Preparing the database
 
 The largest chunk of work will be finding the right configuration for connecting to the database. This application will connect to the oracle reporting database within the existing system.
 
-An oracle adapter has been added to the set of production libraries, but
-since we do not have access to your system, we do not know what
-configuration is necessary to connect successfully.
+We have included [activerecord-oracle_enhanced-adapter](https://github.com/rsim/oracle-enhanced) to handle connecting to Oracle, and it has some [database.yml configuration documentation](https://github.com/rsim/oracle-enhanced#database-connection) that may be helpful.  For example, this might make a suitable `production` configuration:
+
+```
+production:
+  url: <%= ENV['DATABASE_URL'] %>
+```
+
+Then add your database connection URL to your environment variables.  For example:
+
+```
+export DATABASE_URL='oracle-enhanced://username:password@host:port/database-name'
+```
+
+> **NOTE:** It is a best practice to put your database connection information in an environment variable in any case.  This is inline with the [12-factor app methodology](https://12factor.net/config).  This makes moving the app around much easier.
 
 ## Environment variables
 
@@ -57,14 +68,22 @@ export AUTH_HMAC_SECRET='some-secret-string'
 export SECRET_KEY_BASE='some-other-secret-string'
 ```
 
-The `AUTH_HMAC_SECRET` environment variable is used to encrypt authentication calls between the Dashboard and API, and must be set to the same value on both.  It is a cryptographic key so should be reasonably secure.  A reasonable choice would be to concatenate together a couple of passwords from https://www.grc.com/passwords.htm.
+You may also need database connection information depending on your configuration.
+
+The `AUTH_HMAC_SECRET` environment variable is used to encrypt authentication calls between the Dashboard and API, and must be set to the same value on both.
 
 In addition Rails uses a secret key to authenticate requests. In order
 for the server to work, you will need to set this value to a key.
 
-Rails comes with a handy script for generating theses keys:
+These keys are cryptographic keys and should thus be reasonably strong and secure.  Helpfully, Rails comes with a handy script for generating theses keys:
 
-  rake secret
+```
+rake secret
+```
+
+You can just copy the output of this script into your environment variables.
+
+>**Note:** If the `AUTH_HMAC_SECRET` is changed, it must *also* be changed on all clients, such as the Dashboard.  This key must be the same on the API and all clients or else the clients cannot authenticate to the API.
 
 ## Start the API
 
