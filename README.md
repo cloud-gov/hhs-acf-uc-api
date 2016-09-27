@@ -47,6 +47,28 @@ other non-sensitive information.
 
 Only the queries needed for the dashboard have been created:
 
+### Authentication
+
+All endpoints must be authenticated.  Authentication is handled with a [JSON Web Token](https://jwt.io/) presented by the caller in the HTTP header of the request.  The [JWT gem](https://github.com/jwt/ruby-jwt) is a good library to help build the token.  The token must be encrypted with HMAC using a SHA512 hash, using a secret key.
+
+The HMAC secret is used to encrypt authentication calls to the API. It is essentially a cryptographic key shared between the API and its clients, so it should be reasonably secure. A reasonable choice would be to concatenate together a couple of passwords from https://www.grc.com/passwords.htm.
+
+For the API to function, the shared secret must be in an environment variable called `AUTH_HMAC_SECRET`.
+
+For client requests, the JWT token must be placed in the `Authorization` header, preceded by the word "Token" (e.g., the full header would be `Authorization: Token {token}`).
+
+An example using RestClient:
+
+```
+require "rest-client"
+require "JWT"
+
+hmac_secret = ENV["AUTH_HMAC_SECRET"]
+token = JWT.encode({:role => 'user role', :exp => Time.now.to_i + 86400}, hmac_secret, "HS512")
+
+RestClient.get("http://127.0.0.1:3000/enrollments/count", headers={:Authorization => "Token #{token}"})
+```
+
 #### Referrals on a given date
 
     /referrals # defaults to today
