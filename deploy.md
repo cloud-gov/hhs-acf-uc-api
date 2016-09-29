@@ -20,6 +20,10 @@ If your environment has a different version of Ruby than what the API expects, y
 rvm install `cat .ruby-version`
 ```
 
+>Note that rvm might need root permissions, depending on your system, so it might be necessary to run this with `su`!
+
+You will also need the Oracle client (the instant client is sufficient, as well as the instant client SDK) if your reporting database is Oracle.  For Oracle 12.1, they can be downloaded from the [Oracle download center](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html).
+
 ## The application
 
 The application depends on a handful of Ruby libraries.  These are specified in the Gemfile.  The Gemfile provides a quick way to install all of the libraries at once using `bundle` instead of having to do each one manually.  To install the application library dependencies, run:
@@ -31,6 +35,8 @@ gem install bundle
 # Install from the Gemfile
 bundle install
 ```
+
+> Note that the `gem install` command might require root permissions, depending on how your environment is configured.
 
 ## Deploy scripting
 
@@ -68,7 +74,17 @@ export AUTH_HMAC_SECRET='some-secret-string'
 export SECRET_KEY_BASE='some-other-secret-string'
 ```
 
-You may also need database connection information depending on your configuration.
+You may also need database connection information depending on your configuration:
+
+```
+export DATABASE_URL='oracle-enhanced://username:password@host:port/database-name'
+```
+
+And finally, if you're using Oracle, you will need to specify the library path (double-check this path for your environment; it might be `client64` instead):
+
+```
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client/lib
+```
 
 The `AUTH_HMAC_SECRET` environment variable is used to encrypt authentication calls between the Dashboard and API, and must be set to the same value on both.
 
