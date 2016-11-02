@@ -61,6 +61,10 @@ Then add your database connection URL to your environment variables.  For exampl
 export DATABASE_URL='oracle-enhanced://username:password@host:port/database-name'
 ```
 
+> **NOTE:** If you're using TNS, replace `database-name` with the TNS **service name**. See the [oracle-enhanced documentation](https://github.com/rsim/oracle-enhanced) for more information.
+
+> **NOTE:** If you get an ORA 12705 error (`Cannot access NLS data`), make sure the `NLS_LANG` environment variable is *not* set (e.g., `unset NLS_LANG`).  For some weird reason, the database can sometimes fail to connect if the character encoding is set.  See the [notes on dba-oracle.com](http://www.dba-oracle.com/t_ora_12705_resolution.htm).
+
 > **NOTE:** It is a best practice to put your database connection information in an environment variable in any case.  This is inline with the [12-factor app methodology](https://12factor.net/config).  This makes moving the app around much easier.
 
 ## Environment variables
