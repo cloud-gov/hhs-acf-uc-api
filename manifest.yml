@@ -3,9 +3,9 @@ applications:
   buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
   memory: 1GB
   env:
-    DEFAULT_URL_HOST: hhs-uc-api.apps.cloud.gov
-    HOST: hhs-uc-api.apps.cloud.gov
-    APPLICATION_HOST: hhs-uc-api.apps.cloud.gov
+    DEFAULT_URL_HOST: hhs-uc-api.fr.cloud.gov
+    HOST: hhs-uc-api.fr.cloud.gov
+    APPLICATION_HOST: hhs-uc-api.fr.cloud.gov
     RESTRICT_ACCESS: true
     RACK_ENV: production
     RAILS_ENV: production
